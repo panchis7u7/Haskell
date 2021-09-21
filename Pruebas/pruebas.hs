@@ -77,3 +77,37 @@ fibfast n = fib' 0 1 n
     where fib' a !b !n
               | n <= 1 = b
               | otherwise = fib' b (a+b) (n-1)
+
+{- List creation. -}
+createList:: Int -> Int -> [Int]
+createList n m
+    | m < n = []
+    | m == n = [m]
+    | otherwise = n : createList (n+1) m
+
+{- import Data.List -}
+{- Head Function -}
+{- Tail Function -}
+{- Length Function -}
+{- Init Function -}
+{- null function -}
+{- and function -}
+{- or function -}
+
+{- List Comprehension. -}
+{-[2*x | x <- [1,2,3]] => [2,4,6]-}
+{-[2*x | x <- [1,2,3], x>1] => [4,6] -}
+
+{- List Patterns -}
+
+{- Sum list elements. -}
+sumList:: [Int] -> Int
+sumList [] = 0
+sumList (x:xs) = x + sumList xs
+
+{- Evens in list. -}
+evens:: [Int] -> [Int]
+evens [] = []
+evens (x:xs)
+          | mod x 2 == 0 = x : evens xs
+          | otherwise = evens xs
