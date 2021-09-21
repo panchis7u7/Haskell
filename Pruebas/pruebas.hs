@@ -111,3 +111,24 @@ evens [] = []
 evens (x:xs)
           | mod x 2 == 0 = x : evens xs
           | otherwise = evens xs
+
+{- Create a function elem that returns True if an element is in a given list,
+and return false otherwise-}
+elem:: (Eq a) => a -> [a] -> Bool
+elem _ [] = False
+elem e (x:xs) = (e == x) ||  (Main.elem e xs)
+
+{- Create a function nub that removes all duplicates from a given list. -}
+nub:: (Eq a) => [a] -> [a]
+nub [] = []
+nub (x:xs)
+        | Main.elem x xs = nub xs
+        | otherwise = x : nub xs
+
+{- Create a function isAsc that returns True if the list given to it is a list
+of ascending order. -}
+isAsc:: [Int] -> Bool
+isAsc [] = True
+isAsc [x] = True
+isAsc (x:y:xs) =
+    (x <= y) && isAsc (y:xs)
