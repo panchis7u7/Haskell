@@ -112,8 +112,8 @@ evens (x:xs)
           | mod x 2 == 0 = x : evens xs
           | otherwise = evens xs
 
-{- Create a function elem that returns True if an element is in a given list,
-and return false otherwise-}
+evensSum = sumList . evens
+
 elem:: (Eq a) => a -> [a] -> Bool
 elem _ [] = False
 elem e (x:xs) = (e == x) ||  (Main.elem e xs)
@@ -132,3 +132,20 @@ isAsc [] = True
 isAsc [x] = True
 isAsc (x:y:xs) =
     (x <= y) && isAsc (y:xs)
+
+{- Create a function hasPath that determines if a path from one node to another
+exists within a dircted graph. -}
+hasPath:: [(Int, Int)] -> Int -> Int -> Bool
+hasPath [] x y = x == y
+hasPath xs x y
+            | x == y = True
+            | otherwise =
+                let xs' = [(n,m) | (n,m) <- xs, n /= x] in
+                or [hasPath xs' m y | (n,m) <- xs, n == x]
+
+{- Create a custom map function using Higher order functions. -}
+customMap:: (a -> b) -> [a] -> [b]
+customMap f [] = []
+customMap f (x:xs) = f x : customMap f xs
+
+{- (.):: (b -> c) -> (a -> b) -> a -> c -}
