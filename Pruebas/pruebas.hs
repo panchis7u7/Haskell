@@ -112,8 +112,6 @@ evens (x:xs)
           | mod x 2 == 0 = x : evens xs
           | otherwise = evens xs
 
-evensSum = sumList . evens
-
 elem:: (Eq a) => a -> [a] -> Bool
 elem _ [] = False
 elem e (x:xs) = (e == x) ||  (Main.elem e xs)
@@ -149,3 +147,10 @@ customMap f [] = []
 customMap f (x:xs) = f x : customMap f xs
 
 {- (.):: (b -> c) -> (a -> b) -> a -> c -}
+evensSum = sumList . evens
+
+{- Folding. -}
+{- foldr = Foldable t => (a -> b -> b) -> b -> t a -> b -}
+{- Create a map function using foldr.-}
+foldrMap:: (a -> b) -> [a] -> [b]
+foldrMap f xs = foldr ((:) . f) [] xs
